@@ -3,7 +3,7 @@
 __pycache__/
 
 # Local database and collected static files
-db.sqlite3
+
 staticfiles/
 
 # Environment files
