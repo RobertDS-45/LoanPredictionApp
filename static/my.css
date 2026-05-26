@@ -1,11 +1,96 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    color: #233044;
+    margin: 0;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-            background-color: #f0f0f0;
-        }
-        h1 {
-            color: #54df59;
-        }
-    
+h1, h2, h3, h4, h5, h6 {
+    color: #1f2937;
+}
+
+.hero-section {
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    color: #ffffff;
+    padding: 70px 0;
+    border-radius: 0 0 35px 35px;
+}
+
+.feature-box,
+.card,
+.card form,
+.card .table-responsive,
+.table-responsive {
+    border-radius: 16px;
+}
+
+.feature-box {
+    background: #ffffff;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+}
+
+.feature-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(15, 23, 42, 0.12);
+}
+
+.form-card,
+.result-card,
+.register-card,
+.card {
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+}
+
+.prediction-box {
+    font-size: 2rem;
+    font-weight: 800;
+    padding: 22px;
+    border-radius: 1rem;
+    margin: 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.summary-box {
+    background-color: #f8f9fa;
+    border-left: 4px solid #6c757d;
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 45px 0;
+    }
+    .feature-box {
+        padding: 20px;
+    }
+    .navbar .nav-link,
+    .navbar .btn {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section {
+        padding: 35px 0;
+    }
+    .feature-box,
+    .card {
+        border-radius: 1rem;
+    }
+    .prediction-box {
+        font-size: 1.6rem;
+    }
+    .navbar .btn {
+        width: 100%;
+    }
+    .navbar .navbar-collapse {
+        background-color: #1b2a40;
+        padding: 1rem;
+        border-radius: 0.75rem;
+    }
+    .card {
+        margin-bottom: 1.5rem;
+    }
+}
