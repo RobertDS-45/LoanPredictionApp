@@ -5,7 +5,7 @@ services:
     pythonVersion: 3.13.12
     region: oregon
     plan: free
-    buildCommand: pip install --upgrade pip setuptools wheel && pip install -r requirements.txt && python manage.py collectstatic --no-input
+    buildCommand: pip install --upgrade pip setuptools wheel && pip install --pre -r requirements.txt && python manage.py collectstatic --no-input
     startCommand: gunicorn LQS.wsgi --log-file -
     envVars:
       - key: DJANGO_ALLOWED_HOSTS
