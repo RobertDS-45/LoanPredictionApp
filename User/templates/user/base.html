@@ -10,34 +10,40 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top">
         <div class="container-lg">
-            <a class="navbar-brand fw-bold text-info" href="{% url 'home' %}">LQS Portal</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand fw-bold text-info me-3" href="{% url 'home' %}">LQS Portal</a>
+
+            <button class="navbar-toggler d-lg-none border-0 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="mainNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            <div class="d-none d-lg-flex align-items-center justify-content-between flex-grow-1">
+                <ul class="navbar-nav me-3">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                        <a class="nav-link px-2" href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'predict' %}">Predict</a>
+                        <a class="nav-link px-2" href="{% url 'predict' %}">Predict</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+
+                <ul class="navbar-nav ms-auto align-items-center">
                     {% if user.is_authenticated %}
                         {% if user.is_staff %}
-                            <li class="nav-item me-lg-2">
-                                <a class="btn btn-sm btn-info text-white fw-bold mb-2 mb-lg-0" href="{% url 'admin_loan_list' %}">Admin Panel</a>
-                            </li>
-                        {% endif %}
-                        <li class="nav-item me-lg-2">
-                            <a class="btn btn-sm btn-warning text-dark fw-bold mb-2 mb-lg-0" href="{% url 'history' %}">History</a>
+                        <li class="nav-item me-2">
+                            <a class="btn btn-sm btn-info text-white fw-bold" href="{% url 'admin_loan_list' %}">Admin Panel</a>
                         </li>
-                        <li class="nav-item me-lg-2 text-white small d-none d-lg-block">
+                        {% endif %}
+
+                        <li class="nav-item me-2">
+                            <a class="btn btn-sm btn-warning text-dark fw-bold" href="{% url 'history' %}">History</a>
+                        </li>
+
+                        <li class="nav-item me-3 text-white small d-none d-xl-inline-block">
                             Hello, <strong>{{ user.username }}</strong>
                         </li>
+
                         <li class="nav-item">
                             <form method="post" action="{% url 'logout' %}" class="d-flex">
                                 {% csrf_token %}
@@ -57,14 +63,49 @@
         </div>
     </nav>
 
+    <div class="offcanvas offcanvas-start text-bg-dark d-lg-none" data-bs-backdrop="true" data-bs-scroll="true" tabindex="-1" id="mainNav" aria-labelledby="mainNavLabel">
+        <div class="offcanvas-header border-bottom border-secondary">
+            <h5 class="offcanvas-title text-white" id="mainNavLabel">Menu</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body px-3">
+            <ul class="navbar-nav flex-column gap-2">
+                <li class="nav-item">
+                    <a class="nav-link text-white fw-semibold" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white fw-semibold" href="{% url 'predict' %}">Predict</a>
+                </li>
+            </ul>
+
+            {% if user.is_authenticated %}
+                <div class="mt-4 pt-2 border-top border-secondary">
+                    {% if user.is_staff %}
+                        <a class="btn btn-info btn-lg w-100 mb-2" href="{% url 'admin_loan_list' %}">Admin Panel</a>
+                    {% endif %}
+                    <a class="btn btn-warning btn-lg w-100 mb-2 text-dark" href="{% url 'history' %}">History</a>
+                    <form method="post" action="{% url 'logout' %}" class="d-grid gap-2">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-lg w-100">Logout</button>
+                    </form>
+                </div>
+            {% else %}
+                <div class="mt-4 pt-2 border-top border-secondary d-grid gap-2">
+                    <a class="btn btn-outline-light btn-lg w-100" href="{% url 'login' %}">Login</a>
+                    <a class="btn btn-primary btn-lg w-100" href="{% url 'register' %}">Sign Up</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
     <main class="py-4">
         <div class="container-lg">
             {% block content %}{% endblock %}
         </div>
     </main>
 
-    <footer class="bg-dark text-white text-center py-3 mt-4 small">
-        <div class="container-lg">
+    <footer class="site-footer">
+        <div class="footer-inner text-center small">
             &copy; 2026 LQS - Loan Prediction Application. All rights reserved.
         </div>
     </footer>
